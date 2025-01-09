@@ -83,6 +83,7 @@ production:
     <<: *default
     database: fruitsite_production
     username: fruitsite
+    url: <%= ENV['DATABASE_URL'] %>
     password: <%= ENV["FRUITSITE_DATABASE_PASSWORD"] %>
   cache:
     <<: *primary_production
