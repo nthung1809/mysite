@@ -16,6 +16,8 @@
     <link rel="icon" href="/icon.png" type="image/png">
     <link rel="icon" href="/icon.svg" type="image/svg+xml">
     <link rel="apple-touch-icon" href="/icon.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+
 
     <%# Includes all stylesheet files in app/assets/stylesheets %>
     <%= stylesheet_link_tag :app, "data-turbo-track": "reload" %>
@@ -23,15 +25,64 @@
   </head>
 
   <body>
-      <% if !user_signed_in? %>
-        <p class="sign_in"><%= link_to "Login", new_user_session_path %></p>
-      <% end %>
-      <% if user_signed_in? %>
-        <%= button_to "Đăng xuất", destroy_user_session_path, method: :delete %>
-      <% end %>
-      <%= link_to "Home", root_path %>
-      <p class="notice"><%= notice %></p>
-      <p class="alert"><%= alert %></p>
-      <%= yield %>
+        <div class="app">
+            <p class="notice"><%= notice %></p>
+            <p class="alert"><%= alert %></p>
+            <div class="grid wide">
+
+              <nav class="header-nav">
+                  <div class="grid wide">
+                      <div class="header-wrapper">                      
+                          <div class="header-nav__logo">                            
+                            <%= image_tag "/path/to/logo.png", alt: "Logo", class: "header-nav__logo_img" %>
+
+                          </div>
+
+                          <div class="header-nav__withSearch">
+                                  <input type="text" class="header-nav__input" placeholder="Bạn muốn tìm gì?">                              
+                              <a href="" class=" btn-search">
+                                  <i class="fa-solid fa-magnifying-glass btn-search__icon"></i>
+                              </a>
+                          </div>
+
+                          <ul class="header-nav__menu hideOnTablet">
+                              <li class="nav__menu-item">
+                                  <%= link_to "Trang chủ", root_path, class: "menu-item__link " %>                             
+
+                              </li>                             
+                            
+                              <li class="nav__menu-item nav__menu-item--login">
+                                
+                                      
+                                        <% if !user_signed_in? %>
+                                          <%= link_to "Đăng nhập", new_user_session_path , class: "menu-item__link menu-item__user" %>
+                                        <% end %>                                                                                                                                                         
+                              </li>
+
+                              <li class="nav__menu-item nav__menu-item--login">
+                                <% if user_signed_in? %>
+                                  <%= button_to destroy_user_session_path, method: :delete, class: "menu-item__link menu-item__user item" do %>
+                                    <i class="fa-solid fa-right-from-bracket icon"></i> Đăng xuất
+                                  <% end %>                                          
+                                <% end %>
+                              </li>
+
+                                      
+                          </ul>
+                              
+                              
+                      </div>
+                  </div>
+              </nav>            
+
+          </div>                         
+
+          <main class="main-content">
+            <div class="grid wide">
+                <%= yield %>
+            </div>
+          </main>
+
+      </div>
   </body>
 </html>

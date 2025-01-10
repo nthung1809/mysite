@@ -1,29 +1,33 @@
-<h2>Sign up</h2>
+<div class="register-container">
+  <h2 class="register-title">Đăng Ký</h2>
 
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-  <%= render "devise/shared/error_messages", resource: resource %>
+  <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { class: "register-form" }) do |f| %>
+    <%= render "devise/shared/error_messages", resource: resource %>
 
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+    <div class="field">
+      <%= f.label :email, "Tên tài khoản", class: "register-label" %><br />
+      <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "register-input" %>
+    </div>
+
+    <div class="field">
+      <%= f.label :password, "Mật khẩu" , class: "register-label" %>
+      <% if @minimum_password_length %>
+        <em class="password-hint">(<%= @minimum_password_length %> ký tự tối thiểu)</em>
+      <% end %><br />
+      <%= f.password_field :password, autocomplete: "new-password", class: "register-input" %>
+    </div>
+
+    <div class="field">
+      <%= f.label :password_confirmation, "Xác nhận mật khẩu", class: "register-label" %><br />
+      <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "register-input" %>
+    </div>
+
+    <div class="actions">
+      <%= f.submit "Đăng ký", class: "register-submit" %>
+    </div>
+  <% end %>
+
+  <div class="register-links">
+    Bạn đã có tài khoản? <%= render "devise/shared/links" %>
   </div>
-
-  <div class="field">
-    <%= f.label :password %>
-    <% if @minimum_password_length %>
-    <em>(<%= @minimum_password_length %> characters minimum)</em>
-    <% end %><br />
-    <%= f.password_field :password, autocomplete: "new-password" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit "Sign up" %>
-  </div>
-<% end %>
-
-<%= render "devise/shared/links" %>
+</div>

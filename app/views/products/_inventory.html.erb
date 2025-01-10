@@ -1,0 +1,5 @@
+<% if product.inventory_count? %>
+  <p><%= product.inventory_count %> trong kho</p>
+<% else %>
+  <p>Hết hàng</p>
+<% end %>
